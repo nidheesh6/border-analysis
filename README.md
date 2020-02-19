@@ -176,13 +176,27 @@ Email us at cc@insightdataengineering.com
 
 ##Approach
 **1.Reading data from the files:
+
+
 *I used the dictionary for storing the data from the files.the field name is taken as the key and the values for the corresponding field_names are stores in the list as key-list pair in the dictionary
+
+
 *2.Identifying the unique values from the data.
+
 *the uniques vales from the dictionary are identified and stored in the other dictionary named unique_table.
 *3.calculating the sum of crossings
+
 *for each date,measure and the border corresponding sum of the crossings(i.e the sum of values having the same measure,border and date) *are added and stored in the other key-alue pair.
+
+
 *4.sorting the data based on the date,value,measure,border:
+
 *for sorting the data ,the lists are zipped based on the date,value,measure,border in order,then the list is sorted in the decreasing *order
+
+
 *5.calculating the average
+
 *the average is calculated by adding the value below the date corresponding measure and border
+
+
 *6.writing the results to the file.
