@@ -5,12 +5,15 @@ import sys
 
 
 #READING THE DATA FROM THE CSV FILE 
-
-data=open(sys.argv[1],"r")
-k=data.readline()
-p=k.rstrip()
-field_names=p.split(',')
-table={}
+try:
+    data=open(sys.argv[1],"r")
+    k=data.readline()
+    p=k.rstrip()
+    field_names=p.split(',')
+    table={}
+except OSError as err:
+    print("OS error: {0}".format(err))
+    sys.exit()
 
 for i in range(len(field_names)):
     table[field_names[i]]=[]
@@ -85,7 +88,11 @@ for i in unique_table['year_month']:
             s=0
             for j in range(len(table['Border'])):
                  if m==table['Border'][j] and i==table['year_month'][j] and n==table['Measure'][j]:
-                        s=s+int(table['Value'][j])
+                        try:
+                            s=s+int(table['Value'][j])
+                        except ValueError:
+                            print("Could not convert data to an integer at value index"+str(j))
+                            s=s+0
             if s!=0:
                      
                 mydata['Border'].append(m)
@@ -151,11 +158,14 @@ dt=list(zip(k,average))
 
 
 #WRITING RESULTS TO THE CSV FILE
-f=open(sys.argv[2],"w")
-f.write("Border,Date,Measure,Value,Average")
-f.write("\n")
-for i in range(len(dt)):
-    f.write(str(dt[i][0][3])+","+str(dt[i][0][0][4:])+"/01/"+str(dt[i][0][0][:4])+" "+"12:00:00 AM"+","+str(dt[i][0][2])+","+str(dt[i][0][1])+","+str(dt[i][1]))
-    f.write("\n")
+try:
+	f=open(sys.argv[2],"w")
+	f.write("Border,Date,Measure,Value,Average")
+	f.write("\n")
+	for i in range(len(dt)):
+		f.write(str(dt[i][0][3])+","+str(dt[i][0][0][4:])+"/01/"+str(dt[i][0][0][:4])+" "+"12:00:00 AM"+","+str(dt[i][0][2])+","+str(dt[i][0][1])+","+str(dt[i][1]))
+		f.write("\n")
+except OSError as err:
+    print("OS error: {0}".format(err))
 f.close()
 
