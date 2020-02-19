@@ -8,6 +8,7 @@
 1. [Instructions](README.md#instructions)
 1. [Tips on getting an interview](README.md#tips-on-getting-an-interview)
 1. [Questions?](README.md#questions?)
+1. [APPROACH](README.md#approach)
 
 ## Problem
 The Bureau of Transportation Statistics regularly makes available data on the number of vehicles, equipment, passengers and pedestrians crossing into the United States by land.
@@ -146,6 +147,18 @@ The directory structure for your repo should look like this:
 To make sure that your code has the correct directory structure and the format of the output files are correct, we have included a test script called `run_tests.sh` in the `insight_testsuite` folder.
 
 The tests are stored simply as text files under the `insight_testsuite/tests` folder. Each test should have a separate folder with an `input` folder with the test `Border_Crossing_Entry_Data.csv` input file and an `output` folder with what should be the expected `report.csv` for that test.
+##Approach
+1. Reading data from the files:
+I used the dictionary for storing the data from the files.the field name is taken as the key and the values for the corresponding field_names are stores in the list as key-list pair in the dictionary
+2.Identifying the unique values from the data.
+the uniques vales from the dictionary are identified and stored in the other dictionary named unique_table.
+3.calculating the sum of crossings
+for each date,measure and the border corresponding sum of the crossings(i.e the sum of values having the same measure,border and date) are added and stored in the other key-alue pair.
+4.sorting the data based on the date,value,measure,border:
+for sorting the data ,the lists are zipped based on the date,value,measure,border in order,then the list is sorted in the decreasing order
+5.calculating the average
+the average is calculated by adding the value below the date corresponding measure and border
+6.writing the results to the file.
 
 You can run the test with the following command from within the `insight_testsuite` folder:
 
